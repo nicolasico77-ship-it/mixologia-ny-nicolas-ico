@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Arte & Coctelería — Mixología</title>
+<meta name="description" content="Página sobre mixología: historia, técnicas, cristalería, destilados y recetario práctico." />
+<style>
+  /* --- Reset & base --- */
+  :root{
+    --accent:#b84b2a;
+    --dark:#0f1720;
+    --muted:#6b7280;
+    --bg:#fbfbfb;
+    --card:#ffffff;
+    --gap:18px;
+    font-family: "Inter", "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#fff,#f7f7f9);color:var(--dark);line-height:1.5}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(90deg,#11182700, #11182711);backdrop-filter:blur(2px);position:sticky;top:0;z-index:40}
+  .nav{max-width:1100px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:12px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+  .logo .dot{width:12px;height:12px;background:var(--accent);border-radius:3px;display:inline-block}
+  nav{margin-left:auto}
+  nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+  nav button{background:none;border:0;padding:8px 10px;border-radius:8px;cursor:pointer}
+  nav button:hover{background:#f1f5f9}
+  .hero{max-width:1100px;margin:22px auto;padding:24px;display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+  .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(16,24,40,0.06)}
+  h1{margin:0 0 8px;font-size:1.8rem}
+  .lead{color:var(--muted);margin-bottom:12px}
+  .cover-img{width:100%;height:200px;border-radius:10px;object-fit:cover}
+  .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
+  .small{font-size:0.9rem;color:var(--muted)}
+  main{max-width:1100px;margin:18px auto;padding:0 18px 80px}
+  section{margin:20px 0}
+  .two-col{display:grid;grid-template-columns:1fr 320px;gap:20px}
+  @media (max-width:900px){.hero,.two-col{grid-template-columns:1fr}.menu-grid{grid-template-columns:repeat(3,1fr)}nav ul{display:none}}
+  /* timeline */
+  .timeline{display:flex;overflow:auto;gap:14px;padding:6px 2px}
+  .t-item{min-width:180px;background:#fff;border-radius:10px;padding:12px;box-shadow:0 4px 14px rgba(2,6,23,0.04)}
+  .t-year{font-weight:700;color:var(--accent);font-size:1.05rem}
+  /* filter pills */
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .pill{padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #eee;cursor:pointer}
+  .pill.active{background:var(--accent);color:white;border-color:transparent}
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .gallery img{width:100%;height:100px;object-fit:cover;border-radius:8px}
+  /* recipes */
+  .recipes{display:grid;gap:12px}
+  .recipe{border-radius:10px;overflow:hidden;border:1px solid #eee}
+  .recipe header{display:flex;justify-content:space-between;align-items:center;padding:12px;background:linear-gradient(90deg,#ffffff,#fffefc);cursor:pointer}
+  .recipe .meta{font-size:0.9rem;color:var(--muted)}
+  .recipe .body{padding:12px;background:#fff}
+  .grid-2{display:grid;grid-template-columns:1fr 220px;gap:12px}
+  @media (max-width:900px){.grid-2{grid-template-columns:1fr}}
+  /* footer */
+  footer{max-width:1100px;margin:40px auto;padding:20px 18px;color:var(--muted)}
+  .cta{display:flex;gap:12px;align-items:center}
+  .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
+  /* small helpers */
+  .muted{color:var(--muted)}
+  .kbd{font-family:monospace;background:#11182706;padding:2px 6px;border-radius:6px;font-size:0.85rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo"><span class="dot"></span><div>Arte & Coctelería</div></div>
+    <nav>
+      <ul>
+        <li><button onclick="scrollToId('inicio')">Inicio</button></li>
+        <li><button onclick="scrollToId('historia')">Historia</button></li>
+        <li><button onclick="scrollToId('clasificacion')">Clasificación</button></li>
+        <li><button onclick="scrollToId('tecnicas')">Técnicas</button></li>
+	<li><button onclick="scrollToId('cristaleria')">Cristaleria & utencilios</button></li>
+        <li><button onclick="scrollToId('recetario')">Recetario</button></li>
+        <li><button onclick="scrollToId('referencias')">Referencias</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="inicio" class="hero">
+  <div class="card">
+    <h1>Arte & Coctelería</h1>
+    <p class="lead">
+      La mixología es el arte y la ciencia de combinar sabores, aromas y técnicas 
+      para crear experiencias únicas en cada copa. Desde los clásicos que marcaron 
+      la historia hasta innovaciones modernas llenas de creatividad, la coctelería 
+      invita a explorar sensaciones y emociones a través del sabor.
+    </p>
+    <p>
+      Este sitio te dará un recorrido por los fundamentos del bar: cómo surgió la 
+      coctelería, qué bebidas se utilizan como base, cuáles son las técnicas esenciales, 
+      y cómo poner en práctica tus conocimientos con un recetario de cócteles que podrás 
+      preparar en casa o en el bar.
+    </p>
+    <p style="margin-top:12px"><strong>¡Bienvenido al fascinante mundo de la coctelería! 🍸✨</strong></p>
+	<img src="images/imalargada.webp" alt="Cóctel destacado" class="cover-img" />
+
+  </div>
+
+  <aside class="card">
+&nbsp;
+    <img src="images/mix.jpg" alt="Cóctel destacado" class="cover-img" />
+&nbsp;
+    <h3 style="margin-top:10px">Navegación</h3>
+    <ol class="small">
+      <li>Historia</li>
+      <li>Clasificación</li>
+      <li>Técnicas</li>
+      <li>Cristalería</li>
+      <li>Mobiliario</li>
+      <li>Destilados y fermentados</li>
+      <li>Recetario</li>
+    </ol>
+&nbsp;
+  </aside>
+</section>
+
+<main>
+  <!-- Historia -->
+  <section id="historia" class="card">
+    <h2>Historia de la coctelería</h2>
+    <p>La coctelería nace como práctica social y culinaria: desde antiguas mezclas de bebidas y remedios hasta los bares modernos que perfeccionaron técnicas y estética. A continuación, una línea de tiempo con los hitos más importantes.</p>
+    <div class="timeline" aria-hidden="false" role="list">
+      <div class="t-item" tabindex="0"><div class="t-year">Siglos XVI–XVIII</div><div class="small">Introducción de licores destilados en Europa y primeros mezclados. Medicina y bebidas se confunden.</div>
+	&nbsp;
+ 	<img src="images/image-1.webp" alt="Cóctel destacado" class="cover-img" /></div>
+      <div class="t-item"><div class="t-year">Siglo XIX</div><div class="small">Bar culture: aparición de barras profesionalizadas en ciudades como Nueva York y Londres. Primeros manuales.</div>
+	&nbsp;
+ 	<img src="images/mix2.jpeg" alt="Cóctel destacado" class="cover-img" /></div>
+      <div class="t-item"><div class="t-year"> 1920s</div><div class="small">Prohibición en EE. UU. — creatividad en cócteles escondidos, auge de speakeasies.</div>
+	<br><br>
+ 	<img src="images/speakeasy.jpg" alt="Cóctel destacado" class="cover-img" /></div>
+      <div class="t-item"><div class="t-year">1950s–60s</div><div class="small">Coctelería clásica y el glamour; se popularizan martinis, daiquiris y tiki drinks.</div>
+	<br><br>
+	<img src="images/1950.jpg" alt="Cóctel destacado" class="cover-img" /></div>
+      <div class="t-item"><div class="t-year">1990s–2000s</div><div class="small">Renacimiento: mixología moderna, gastronomía líquida y cocteleros como chefs.</div>
+	<br><br>
+	<img src="images/chef.jpg" alt="Cóctel destacado" class="cover-img" /></div>
+      <div class="t-item"><div class="t-year">2010s–Hoy</div><div class="small">Técnicas de laboratorio, coctelería molecular y énfasis en ingredientes locales y sostenibles.</div>
+	<br><br>
+	<img src="images/molecular.jpg" alt="Cóctel destacado" class="cover-img" /></div>
+
+    </div>
+   
+  </section>
+
+<!-- Clasificación -->
+<section id="clasificacion" class="card">
+  <h2>Clasificación de las bebidas</h2>
+  <p>Las bebidas en mixología se agrupan principalmente en:</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+    <div class="card small"><strong>Destilados</strong><div class="muted">Vodka, Ginebra, Ron, Tequila, Whisky.</div></div>
+    <div class="card small"><strong>Fermentados</strong><div class="muted">Vino, Cerveza, Sake, Sidra.</div></div>
+    <div class="card small"><strong>Licores y aromatizados</strong><div class="muted">Vermouth, amargos, licores dulces.</div></div>
+    <div class="card small"><strong>No alcohólicas</strong><div class="muted">Jugos, sodas y mocktails.</div></div>
+  </div>
+
+  <div style="margin-top:12px">
+
+    <div class="pills" id="pills">
+      <div class="pill active" onclick="filterType('all',this)">Todos</div>
+      <div class="pill" onclick="filterType('destilado',this)">Destilados</div>
+      <div class="pill" onclick="filterType('fermentado',this)">Fermentados</div>
+      <div class="pill" onclick="filterType('licor',this)">Licores y aromatizados</div>
+      <div class="pill" onclick="filterType('sin-alcohol',this)">Sin alcohol</div>
+    </div>
+
+    <h3 id="clasTitle" style="margin-bottom:10px">Todas las bebidas</h3>
+
+    <div id="clas-grid" class="gallery">
+
+      <!-- Destilados -->
+      <div class="card" data-type="destilado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/vodka.jpg"><div class="small" style="padding:8px">Vodka</div></div>
+      <div class="card" data-type="destilado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/gin.jpg"><div class="small" style="padding:8px">Ginebra</div></div>
+      <div class="card" data-type="destilado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/ron.jpg"><div class="small" style="padding:8px">Ron</div></div>
+      <div class="card" data-type="destilado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/tequila.webp"><div class="small" style="padding:8px">Tequila</div></div>
+
+      <!-- Fermentados -->
+      <div class="card" data-type="fermentado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/vino.jpg"><div class="small" style="padding:8px">Vino</div></div>
+      <div class="card" data-type="fermentado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/cerveza.jpg"><div class="small" style="padding:8px">Cerveza</div></div>
+      <div class="card" data-type="fermentado"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/sake.jpg"><div class="small" style="padding:8px">Sake</div></div>
+
+      <!-- Licores y aromatizados -->
+      <div class="card" data-type="licor"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/triplesec.jpg"><div class="small" style="padding:8px">Triple sec</div></div>
+      <div class="card" data-type="licor"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/vermouth.jpg"><div class="small" style="padding:8px">Vermouth</div></div>
+
+      <!-- Sin Alcohol -->
+      <div class="card" data-type="sin-alcohol"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/jugos.jpg"><div class="small" style="padding:8px">Jugos</div></div>
+      <div class="card" data-type="sin-alcohol"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/soda.jpg"><div class="small" style="padding:8px">Soda</div></div>
+      <div class="card" data-type="sin-alcohol"><img style="width:100%;height:140px;object-fit:cover;border-radius:8px;" src="images/mocktail.jpg"><div class="small" style="padding:8px">Mocktails</div></div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Técnicas -->
+  <section id="tecnicas" class="card">
+    <h2>Técnicas de elaboración de cócteles</h2>
+    <p>Descripción de técnicas básicas y cuándo usarlas:</p>
+   
+      <div>
+        <ul>
+          <li><strong>Agitado (shaking):</strong> Para cócteles con jugos, lácteos o ingredientes densos. Uso: coctelera.</li>
+          <li><strong>Removido (stirring):</strong> Para cócteles claros y espirituosos donde no quieres aeración (ej. Manhattan, Martini).</li>
+          <li><strong>Colado (straining):</strong> Usar coladores (Hawthorne y fino) para separar hielo y pulpa.</li>
+          <li><strong>Maceración / muddling:</strong> Aplastar hierbas o frutas para liberar aromas (ej. Mojito).</li>
+          <li><strong>Flameado / flambé:</strong> Técnicas para aromas y espectáculo (usar con precaución).</li>
+          <li><strong>Clarificación & coctelería molecular:</strong> Técnicas avanzadas: geles, espumas, esferificación.</li>
+        </ul>
+          <div style="margin-top:8px">
+          <br>
+          
+	<div style="position:relative;padding-top:45%;
+	background-image: url('images/fondo.png');
+	background-size: cover;
+	background-position: center;
+	border-radius:3px;
+	overflow:hidden">
+
+
+           <a href="https://www.youtube.com/watch?v=eV6JIzSOHvs" target="_blank"
+   class="btn">Ver video de YouTube</a>
+
+    
+        </div>
+      </div>
+      </aside>
+    </div>
+  </section>
+
+<!-- Cristalería y Utensilios -->
+<!-- Cristalería y Utensilios -->
+<section id="cristaleria" class="card">
+  <h2>Cristalería y Utensilios</h2>
+
+  <p style="text-align:justify;">
+    En mixología, la correcta elección de la cristalería y los utensilios es clave para lograr un
+    cóctel bien elaborado y visualmente atractivo. Cada herramienta cumple una función específica:
+    medir, mezclar, enfriar o servir con precisión; mientras que el tipo de copa o vaso influye en
+    la percepción de aromas, temperatura y estética de la bebida.
+  </p>
+
+  <p style="text-align:justify;">
+    Dominar su uso no solo mejora la técnica del bartender, sino que eleva la experiencia del consumidor
+    a un nivel más profesional y sensorial.
+  </p>
+
+  <div class="two-col" style="display:flex; gap:16px; align-items:flex-start; margin-top:15px;">
+    <!-- Texto -->
+    <div style="flex:1;">
+      <h3>Tipos de cristalería</h3>
+      <ul>
+        <li><strong>Copa Martini:</strong> Ideal para cócteles secos y elegantes.</li>
+        <li><strong>Vaso Old Fashioned:</strong> Para bebidas cortas con hielo grande.</li>
+        <li><strong>Highball:</strong> Perfecto para cócteles con soda o jugos.</li>
+        <li><strong>Coupé:</strong> Alternativa refinada para cócteles clásicos.</li>
+      </ul>
+
+      <h3>Utensilios esenciales</h3>
+      <ul>
+        <li>Coctelera (Boston o Cobbler)</li>
+        <li>Coladores (Hawthorne y fino)</li>
+        <li>Jigger para mediciones exactas</li>
+        <li>Muddler para macerar frutas y hierbas</li>
+        <li>Cucharilla de bar para remover</li>
+      </ul>
+    </div>
+
+    <!-- Imágenes -->
+    <aside class="card small" style="flex:1;">
+      <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:nowrap;">
+  <img src="images/cristaleria.jpg" 
+       style="flex:1; max-width:50%; height:auto; border-radius:8px; object-fit:contain;" 
+       alt="Cristalería">
+
+  <img src="images/utensilios.gif" 
+       style="flex:1; max-width:50%; height:auto; border-radius:8px; object-fit:contain;" 
+       alt="Utensilios de bar">
+</div>
+    </aside>
+  </div>
+</section>
+
+  <!-- Mobiliario -->
+  <section id="mobiliario" class="card">
+    <h2>Mobiliario y diseño del bar</h2>
+    <p>Consejos para organizar un bar funcional:</p>
+    <ul>
+      <li><strong>Zonificación:</strong> Barra de servicio, estación de preparación, refrigeración y almacenamiento.</li>
+      <li><strong>Accesibilidad:</strong> Utensilios a mano, botellas ordenadas por uso y frecuencia.</li>
+      <li><strong>Estética:</strong> Iluminación focal, materiales resistentes y una línea visual que invite a quedarse.</li>
+    </ul>
+  </section>
+
+  <!-- Destilados y fermentados -->
+  <section id="destilados" class="card">
+    <h2>Destilados y fermentados</h2>
+    <p>Resumen de procesos y ejemplos:</p>
+    <div class="grid-2">
+      <div>
+        <h3>Destilación</h3>
+        <p>Proceso que concentra alcohol al calentar un líquido fermentado y condensar los vapores. Ejemplos: whisky, vodka, ron, tequila. Influye el tipo de materia prima, alambique y cortes (foreshot, heart, tail).</p>
+
+        <h3>Fermentación</h3>
+        <p>Conversión de azúcares en alcohol por acción de levaduras. Ejemplos: vino, cerveza, sake. El carácter final depende de la cepa, temperatura y tiempo.</p>
+      </div>
+      <aside class="card small">
+        <h4>Usos en coctelería</h4>
+        <p class="small">Conocer la producción ayuda a elegir maridaje con ingredientes y técnicas: un cóctel con whisky pide preparación diferente a uno con ron joven.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Recetario -->
+  <section id="recetario" class="card">
+    <h2>Recetario de cócteles (15 recetas)</h2>
+    <p>Cada receta incluye: ingredientes, técnica, cristalería, y notas de servicio.</p>
+
+    <div class="recipes" id="recipesList">
+      <!-- Recipe example template repeated -->
+      <!-- 1 Negroni -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Negroni</strong> <div class="meta">Clásico — destilado</div></div><div class="meta">Martini / Rocks • 3 ingredientes</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>30 ml Gin</li>
+                <li>30 ml Campari</li>
+                <li>30 ml Vermouth rojo (dulce)</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Remover en vaso mezclador con hielo (stir), colar sobre hielo en vaso old-fashioned. Decorar con cáscara de naranja.</p>
+              <h4>Notas</h4>
+              <p class="small">Balance amargo-dulce. Ideal como aperitivo.</p>
+            </div>
+            <aside>
+              <img src="images/negroni.jpg" alt="Negroni" style="width:100%;border-radius:8px">
+            </aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 Margarita -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Margarita Clásica</strong><div class="meta">Tequila — shaken</div></div><div class="meta">Coupé / Rocks • 3 ingredientes</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>50 ml Tequila blanco</li>
+                <li>25 ml Triple sec (Cointreau)</li>
+                <li>20 ml Jugo de lima fresco</li>
+                <li>Sal para el borde (opcional)</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar con hielo (shake), colar en coupé con borde salado o servir en rocks con hielo.</p>
+            </div>
+            <aside><img src="images/margarita.jpg" alt="Margarita" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 Old Fashioned -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Old Fashioned</strong><div class="meta">Whisky — stirred</div></div><div class="meta">Old Fashioned • 3 ingredientes</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>60 ml Bourbon o Rye</li>
+                <li>1 cucharadita de azúcar o 10 ml de sirope simple</li>
+                <li>2 dashes Angostura bitters</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Macerar el azúcar con bitters, añadir whisky y hielo grande, remover suavemente. Decorar con cáscara de naranja flameada (opcional).</p>
+            </div>
+            <aside><img src="images/oldfashioned.webp" alt="Old Fashioned" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 Mojito -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Mojito</strong><div class="meta">Ron — macerado</div></div><div class="meta">Highball • refrescante</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>45 ml Ron blanco</li>
+                <li>30 ml Jugo de lima</li>
+                <li>8–10 hojas de hierbabuena</li>
+                <li>2 cucharaditas de azúcar o sirope</li>
+                <li>Agua con gas</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Macerar la hierbabuena con azúcar y lima, agregar ron, hielo y completar con soda. Revolver suavemente.</p>
+            </div>
+            <aside><img src="images/mojito.jpg" alt="Mojito" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 Martini -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Martini Seco</strong><div class="meta">Ginebra • stir</div></div><div class="meta">Coupé • elegante</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>60 ml Ginebra</li>
+                <li>10 ml Vermouth seco</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Remover en vaso mezclador con hielo, colar en copa fría y decorar con oliva o twist de limón.</p>
+            </div>
+            <aside><img src="images/martini.jpg" alt="Martini" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 Daiquiri -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Daiquiri Clásico</strong><div class="meta">Ron — shaken</div></div><div class="meta">Coupé • cítrico</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>50 ml Ron blanco</li>
+                <li>25 ml Jugo de lima</li>
+                <li>15 ml Sirope simple</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar con hielo y colar en copa fría.</p>
+            </div>
+            <aside><img src="images/daiquiri.jpg" alt="Daiquiri" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7 Cosmopolitan -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Cosmopolitan</strong><div class="meta">Vodka — shaken</div></div><div class="meta">Coupé • 4 ingredientes</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>45 ml Vodka</li>
+                <li>15 ml Cointreau</li>
+                <li>15 ml Jugo de lima</li>
+                <li>30 ml Jugo de arándanos</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar y colar. Decorar con twist de naranja.</p>
+            </div>
+            <aside><img src="images/cosmopolitan.jpg" alt="Cosmopolitan" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8 Whisky Sour -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Whisky Sour</strong><div class="meta">Bourbon — shaken</div></div><div class="meta">Old Fashioned/Coupé • con clara opc.</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>60 ml Bourbon</li>
+                <li>30 ml Jugo de limón</li>
+                <li>20 ml Sirope simple</li>
+                <li>Clara de huevo (opcional) 15 ml</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar en seco (sin hielo) si usas clara, luego con hielo. Colar y decorar con cereza y rodaja de limón.</p>
+            </div>
+            <aside><img src="images/whiskysour.webp" alt="Whisky Sour" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9 Pisco Sour -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Pisco Sour</strong><div class="meta">Pisco — shaken</div></div><div class="meta">Coupé • clásico peruano</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>60 ml Pisco</li>
+                <li>30 ml Jugo de limón</li>
+                <li>20 ml Sirope simple</li>
+                <li>Clara de huevo (15–20 ml)</li>
+                <li>2 dashes Amargo de Angostura</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar en seco con clara y luego con hielo. Servir y añadir amargo en la espuma.</p>
+            </div>
+            <aside><img src="images/piscosour.webp" alt="Pisco Sour" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10 Espresso Martini -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Espresso Martini</strong><div class="meta">Vodka — shaken</div></div><div class="meta">Coupé • energizante</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>40 ml Vodka</li>
+                <li>30 ml Café espresso frío</li>
+                <li>20 ml Licor de café (Kahlúa)</li>
+                <li>10 ml Sirope simple</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar vigorosamente para crear espuma, colar fino.</p>
+            </div>
+            <aside><img src="images/espressomartini.webp" alt="Espresso Martini" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11 Tom Collins -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Tom Collins</strong><div class="meta">Ginebra — highball</div></div><div class="meta">Highball • refrescante</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>50 ml Ginebra</li>
+                <li>30 ml Jugo de limón</li>
+                <li>15 ml Sirope simple</li>
+                <li>Soda</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar gin, limón y sirope con hielo, colar sobre hielo y completar con soda.</p>
+            </div>
+            <aside><img src="images/tomcollins.webp" alt="Tom Collins" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 12 Boulevardier -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Boulevardier</strong><div class="meta">Whisky + vermouth — stirred</div></div><div class="meta">Rocks • amargo</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>30 ml Bourbon o Rye</li>
+                <li>30 ml Campari</li>
+                <li>30 ml Vermouth rojo</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Remover con hielo, colar sobre hielo. Pariente cercano del Negroni.</p>
+            </div>
+            <aside><img src="images/boulevardier.webp" alt="Boulevardier" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 13 Paloma -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Paloma</strong><div class="meta">Tequila — highball</div></div><div class="meta">Highball • cítrico</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>50 ml Tequila</li>
+                <li>30 ml Jugo de toronja</li>
+                <li>15 ml Jugo de lima</li>
+                <li>Soda de toronja o agua con gas</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Servir en vaso alto con hielo y completar con soda.</p>
+            </div>
+            <aside><img src="images/paloma.png" alt="Paloma" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 14 Mimosa (sin alcohol alternativa) -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Mimosa / Mockmosa</strong><div class="meta">Fermentado — brunch</div></div><div class="meta">Copa flauta • simple</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>75 ml Champagne o cava (o soda para versión sin alcohol)</li>
+                <li>75 ml Jugo de naranja natural</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Servir en flauta con cuidado para conservar burbujas. Para versión sin alcohol usar soda y jugo natural.</p>
+            </div>
+            <aside><img src="images/mimosa.jpg" alt="Mimosa" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- 15 Clover Club -->
+      <article class="recipe">
+        <header onclick="toggleRecipe(this)"><div><strong>Clover Club</strong><div class="meta">Ginebra — shaken con clara</div></div><div class="meta">Coupé • frutal</div></header>
+        <div class="body" style="display:none">
+          <div class="grid-2">
+            <div>
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>45 ml Ginebra</li>
+                <li>15 ml Sirope frambuesa</li>
+                <li>20 ml Jugo de limón</li>
+                <li>Clara de huevo 15 ml</li>
+              </ul>
+              <h4>Técnica</h4>
+              <p>Agitar en seco con clara, luego con hielo. Colar fino y servir en coupé fría.</p>
+            </div>
+            <aside><img src="images/cloverclub.jpg" alt="Clover Club" style="width:100%;border-radius:8px"></aside>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Invitación / CTA -->
+  <section id="invitacion" class="card">
+    <h2>Invitación</h2>
+    <p style="text-align:justify;">
+	Te invitamos a descubrir y explorar el fascinante mundo de la mixología, donde la creatividad, 
+	los sabores y las técnicas se unen para transformar una bebida en una experiencia. 
+	A lo largo de esta página podrás conocer la historia, los utensilios, la cristalería y 
+	los secretos detrás de las preparaciones más emblemáticas.
+	</p>
+
+	<p style="text-align:justify;">
+	Atrévete a experimentar desde casa, pon a prueba tus habilidades y disfruta del arte de mezclar. 
+	Prepara nuestros cócteles sugeridos, personaliza tus ingredientes y permite que cada sorbo sea 
+	una nueva oportunidad para aprender y sorprender. ¡La barra ahora está en tus manos!
+	</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn" style="background:#444" onclick="print()">Imprimir páginas seleccionadas</button>
+    </div>
+  </section>
+
+  <!-- Referencias -->
+  <section id="referencias" class="card">
+    <h2>Fuentes y referencias</h2>
+    <ol class="small">
+    <li>Allen, R. (2020). <i>The Bartender’s Guide to Cocktails: Techniques, Recipes & Spirited History</i>. New York, NY: Sterling Publishing.</li>
+
+    <li>Difford, S. (2021). <i>Difford’s Guide to Cocktails</i>. Recuperado de 
+      <a href="https://www.diffordsguide.com/" target="_blank">https://www.diffordsguide.com/</a>
+    </li>
+
+    <li>International Bartenders Association. (2023). <i>Cocktails & Categories</i>. Recuperado de 
+      <a href="https://iba-world.com/" target="_blank">https://iba-world.com/</a>
+    </li>
+
+    <li>Kozlov, S. (2019). <i>Professional Bartending: Equipment, Techniques and Service</i>. London: Octopus Publishing.</li>
+
+    <li>Liquor.com. (2023). <i>Cocktails, Spirits & Bartending 101</i>. Recuperado de 
+      <a href="https://www.liquor.com/" target="_blank">https://www.liquor.com/</a>
+    </li>
+
+    <li>MasterClass. (2022). <i>Mixology: Cocktail Techniques & Spirit Education</i>. Recuperado de 
+      <a href="https://www.masterclass.com/" target="_blank">https://www.masterclass.com/</a>
+    </li>
+
+    <li>Sánchez, M. (2022). <i>Manual de coctelería moderna</i>. Ciudad de México: Larousse.</li>
+  </ol>
+
+    </section>
+</main>
+
+<footer>
+  <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center">
+    <div class="muted">© Arte & Coctelería — Proyecto Mixología</div>
+    <div>
+      <small class="muted">Nicolas Ico Briceño - 2025</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll helper
+  function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'}) }
+
+  // Filter clasification
+  function filterType(type,el){
+  const pills=document.querySelectorAll('.pill');
+  pills.forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+
+  const cards=document.querySelectorAll('#clas-grid .card');
+  const title=document.getElementById('clasTitle');
+
+  if(type==='all'){
+    cards.forEach(c=>c.style.display='block');
+    title.textContent="Todas las bebidas";
+  } else {
+    cards.forEach(c=>{
+      c.style.display = c.dataset.type===type ? 'block' : 'none';
+    });
+
+    const names={
+      'destilado':"Bebidas destiladas",
+      'fermentado':"Bebidas fermentadas",
+      'sin-alcohol':"Bebidas sin alcohol"
+    };
+    title.textContent = names[type];
+  }
+}
+
+
+  // Toggle recipe body
+  function toggleRecipe(header){
+    const body = header.nextElementSibling;
+    if(!body) return;
+    body.style.display = body.style.display === 'none' || body.style.display==='' ? 'block' : 'none';
+    // scroll into view slight
+    if(body.style.display==='block') header.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  // Dummy download notes (we can't create real pdf here). This will create a text file with basic script.
+  function downloadNotes(){
+    const notes = [
+      "Guion para sustentación - Mixología",
+      "1) Portada - Nombre del proyecto y datos.",
+      "2) Historia - Línea del tiempo (3 puntos clave).",
+      "3) Técnicas - Mostrar 1 técnica en video (shaking) y 1 en vivo (stir).",
+      "4) Recetario - Presentar 2 recetas en vivo (ej: Negroni y Margarita).",
+      "5) Diseño del bar - Explicar zonificación.",
+      "6) Referencias - citar fuentes."
+    ].join("\\n\\n");
+    const blob = new Blob([notes], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'guion_sustentacion.txt'; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Small accessibility: allow Enter to toggle recipes
+  document.querySelectorAll('.recipe header').forEach(h=>{
+    h.tabIndex=0;
+    h.addEventListener('keydown', e=>{
+      if(e.key==='Enter') toggleRecipe(h);
+    });
+  });
+
+  // Replace images missing: if image not found, show placeholder
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=> {
+      img.src = 'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#f3f4f6"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#94a3b8" font-size="20">Imagen no encontrada</text></svg>`);
+    });
+  });
+</script>
+</body>
+</html>
